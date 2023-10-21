@@ -1,0 +1,27 @@
+type Query {
+  info: String!
+  users: [User!]!
+}
+
+type Mutation {
+  userById(id: Int!): User
+  createUser(firstName: String!, lastName: String!, email: String!): User!
+  createOrder(item: String!, totalAmount: Float!, order: Int): Order!
+  getOrders(userId: Int!): [Order]!
+}
+
+type User {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  OrderId: Int
+  orders: [Order]
+}
+
+type Order {
+  id: ID!
+  item: String
+  totalAmount: Float
+  order: Int
+}
