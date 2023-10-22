@@ -2,21 +2,22 @@
 const Fakerator = require('fakerator')
 let fakerator = Fakerator()
 
-const USER_COUNT = 1000
+const ORDER_COUNT = 5000
+const USER_REF = 1000
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     const transaction = await queryInterface.sequelize.transaction()
     try {
-      for (let i = 0; i < USER_COUNT; i++) {
+      for (let i = 0; i < ORDER_COUNT; i++) {
         await queryInterface.bulkInsert(
-          'Users',
+          'Orders',
           [
             {
-              firstName: fakerator.names.firstName(),
-              lastName: fakerator.names.lastName(),
-              email: fakerator.internet.email(),
+              item: fakerator.random.string(7),
+              totalAmount: fakerator.random.number(2000),
+              order: fakerator.random.number(1, USER_REF),
             },
           ],
           { transaction }
@@ -30,7 +31,11 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Users', null, {})
-    await queryInterface.bulkDelete('Orders', null, {})
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
   },
 }

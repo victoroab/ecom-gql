@@ -7,7 +7,7 @@ export const createOrderHandler = async (req: Request, res: Response) => {
     const newOrder = await db.Order.create({
       item: 'pen',
       totalAmount: 200,
-      order: 9,
+      // order: 9,
     })
     res.json(newOrder)
   } catch (e) {

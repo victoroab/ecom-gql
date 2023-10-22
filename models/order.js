@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       order: DataTypes.INTEGER,
     },
     {
+      timestamps: true,
       sequelize,
       modelName: 'Order',
     }

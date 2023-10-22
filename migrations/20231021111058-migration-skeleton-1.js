@@ -28,6 +28,12 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: null,
       },
+      createdAt: {
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+      },
       // orId: {
       //   type: Sequelize.STRING,
       //   defaultValue: null,
@@ -47,6 +53,12 @@ module.exports = {
       totalAmount: {
         type: Sequelize.INTEGER,
         defaultValue: null,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
       },
       // userId: {
       //   type: Sequelize.STRING,

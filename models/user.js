@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       OrderId: DataTypes.INTEGER,
     },
     {
+      timestamps: true,
       sequelize,
       modelName: 'Users',
     }
