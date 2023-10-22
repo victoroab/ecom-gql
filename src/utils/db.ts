@@ -3,30 +3,33 @@ dotenv.config()
 import log from './logger'
 import { Sequelize } from 'sequelize'
 
-// const DB_USERNAME = process.env.DB_USERNAME as string
-// const DB_NAME = process.env.DB_NAME as string
-// const DB_HOST = process.env.DB_HOST as string
-// const DB_PASSWORD = process.env.DB_PASSWORD as string
-// const DIALECT = process.env.DIALECT as string
+type Dialect =
+  | 'mysql'
+  | 'postgres'
+  | 'sqlite'
+  | 'mariadb'
+  | 'mssql'
+  | 'db2'
+  | 'snowflake'
+  | 'oracle'
 
-// export const sequelize = new Sequelize({
-//   username: 'e7m6edxrsr7gie8gsloj',
-//   host: 'aws.connect.psdb.cloud',
-//   password: 'pscale_pw_HgmjqhV4tuuigRQc6zbTThzFoZAAChvkoPqpa5mngz3',
-//   database: 'sequelize_test',
-//   dialect: 'mysql',
-//   dialectOptions: {
-//     ssl: {
-//       rejectUnauthorized: true,
-//     },
-//   },
-// })
+const USERNAME = process.env.DB_USERNAME as string
+const PASSWORD = process.env.DB_PASSWORD as string
+const DATABASE = process.env.DB_NAME as string
+const HOST = process.env.HOST as string
+const DIALECT = process.env.DIALECT as Dialect
+
 export const sequelize = new Sequelize({
-  username: 'root',
-  password: '',
-  database: 'ps_seq',
-  host: 'localhost',
-  dialect: 'mysql',
+  username: USERNAME,
+  password: PASSWORD,
+  database: DATABASE,
+  host: HOST,
+  dialect: DIALECT,
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: true,
+    },
+  },
 })
 
 export async function connectDB() {
@@ -36,12 +39,3 @@ export async function connectDB() {
     log.error(e)
   }
 }
-
-/*
-{
-  database: 'e7m6edxrsr7gie8gsloj',
-  username: DB_USERNAME,
-  password: DB_PASSWORD,
-  dialect: 'mysql',
-}
-*/
