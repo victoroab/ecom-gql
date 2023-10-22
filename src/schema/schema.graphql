@@ -1,12 +1,18 @@
 type Query {
   info: String!
   users: [User!]!
+  getUsersWithTopOrders: [Rank]
 }
 
 type Mutation {
   userById(id: Int!): User
   createUser(firstName: String!, lastName: String!, email: String!): User!
-  createOrder(item: String!, totalAmount: Float!, order: Int): Order!
+  createOrder(
+    item: String!
+    totalAmount: Float!
+    quantity: Int!
+    order: Int
+  ): Order!
   getOrders(userId: Int!): [Order]!
 }
 
@@ -21,7 +27,14 @@ type User {
 
 type Order {
   id: ID!
-  item: String
+  item: String!
   totalAmount: Float
+  quantity: Int!
   order: Int
+}
+
+type Rank {
+  firstname: String!
+  lastname: String!
+  order_count: String!
 }

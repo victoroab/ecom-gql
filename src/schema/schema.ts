@@ -1,4 +1,5 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
+import { GraphQLSchema } from 'graphql'
 import { GraphQLContext } from '../utils/context'
 import typeDefs from './schema.graphql'
 const db = require('../../models/index')
@@ -9,6 +10,29 @@ const resolvers = {
     users: async (parent: unknown, args: {}, context: GraphQLContext) => {
       const users = await db.Users.findAll()
       return users
+    },
+    getUsersWithTopOrders: async (
+      parent: unknown,
+      args: {},
+      context: GraphQLContext
+    ) => {
+      const users = await db.sequelize.query(`
+      SELECT
+      u.firstname,
+      u.lastname,
+      COUNT(o.id) AS order_count
+  FROM
+      users u
+  JOIN
+      orders o ON u.id = o.order
+  GROUP BY
+      u.id, u.firstname, u.lastname
+  ORDER BY
+      order_count DESC
+  LIMIT
+      10;
+      `)
+      return users[0]
     },
   },
 
@@ -41,7 +65,12 @@ const resolvers = {
 
     createOrder: async (
       parent: unknown,
-      args: { item: string; totalAmount: number; order: number },
+      args: {
+        item: string
+        totalAmount: number
+        quantity: number
+        order: number
+      },
       context: GraphQLContext
     ) => {
       const newOrder = await db.Order.create({
@@ -67,7 +96,7 @@ const resolvers = {
   },
 }
 
-export const schema = makeExecutableSchema({
+export const schema: GraphQLSchema = makeExecutableSchema({
   typeDefs,
   resolvers,
 })

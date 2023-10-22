@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       item: DataTypes.STRING,
       totalAmount: DataTypes.FLOAT,
       order: DataTypes.INTEGER,
+      quantity: DataTypes.INTEGER,
+      orderDate: { type: DataTypes.DATE, defaultValue: new Date() },
     },
     {
       timestamps: true,

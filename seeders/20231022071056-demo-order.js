@@ -18,6 +18,7 @@ module.exports = {
               item: fakerator.random.string(7),
               totalAmount: fakerator.random.number(2000),
               order: fakerator.random.number(1, USER_REF),
+              quantity: fakerator.random.number(1, 20),
             },
           ],
           { transaction }
