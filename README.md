@@ -42,7 +42,9 @@
 
 ## Api Endpoints
 
-### Open your web browser and enter http://localhost:PORT/graphql to send requests
+### Open your web browser and enter http://localhost:PORT/graphql to send requests locally
+
+### Test requests with the live api: https://ps-seq.onrender.com/graphql
 
 ### Queries:
 
