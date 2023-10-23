@@ -76,6 +76,7 @@ const resolvers = {
       const newOrder = await db.Order.create({
         item: args.item,
         totalAmount: args.totalAmount,
+        quantity: args.quantity,
         order: args.order,
       })
       return newOrder
