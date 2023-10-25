@@ -22,9 +22,9 @@ const resolvers = {
       u.lastname,
       COUNT(o.id) AS order_count
   FROM
-      users u
+      Users u
   JOIN
-      orders o ON u.id = o.order
+      Orders o ON u.id = o.order
   GROUP BY
       u.id, u.firstname, u.lastname
   ORDER BY
